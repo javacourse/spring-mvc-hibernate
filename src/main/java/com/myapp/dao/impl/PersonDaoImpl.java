@@ -12,7 +12,7 @@ public class PersonDaoImpl extends AbstractHibernateDAO<Person, Long> implements
 	@Override
 	public boolean isExist(Person entity)
 	{
-		
+//test
 //		return !findByCriteria(Restrictions.eq("name", entity.getName())).isEmpty();
 		return false;
 	}
