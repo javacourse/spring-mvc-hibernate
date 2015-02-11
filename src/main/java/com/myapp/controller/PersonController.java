@@ -73,6 +73,14 @@ public class PersonController
 		return "redirect:list";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "del")
+	public String deletePerson(@RequestParam(value = "id") Long id)
+	{
+		logger.debug("Received request to delete person id : " + id);
+		personService.deletePerson(id);
+		return "redirect:list";
+	}
+
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public String handleException(Exception ex)

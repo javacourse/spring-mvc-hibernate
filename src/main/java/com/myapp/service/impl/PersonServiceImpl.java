@@ -38,4 +38,9 @@ public class PersonServiceImpl implements PersonService {
     public void savePerson(Person person) {
         personDao.saveOrUpdate(person);
     }
+
+    @Override
+    public void deletePerson(long id) {
+        personDao.deleteById(id);
+    }
 }
