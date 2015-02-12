@@ -1,5 +1,7 @@
 package com.myapp.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -23,13 +25,25 @@ public class Person implements Serializable {
 	@Column
 	private String lastName;
 
+	@Column
+	private String age;
+
 	public Person() {
 	}
 
-	public Person(String firstName, String lastName) {
+	public Person(String firstName, String lastName, String age) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.age = age;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
 	}
 
 	public Long getId() {

@@ -31,7 +31,7 @@ public interface IGenericDAO<T, ID extends Serializable> {
 
 	List<T> findByCriteria(Criterion... criterion);	
 
-	boolean isExist(T entity);
+	//boolean isExist(T entity);
 	
 	
 	

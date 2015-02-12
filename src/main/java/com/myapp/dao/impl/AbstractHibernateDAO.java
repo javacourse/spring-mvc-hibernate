@@ -190,7 +190,7 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 
 	
 
-	@Override
-	public abstract boolean isExist(T entity);
+//	@Override
+//	public abstract boolean isExist(T entity);
 	
 }
