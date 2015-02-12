@@ -1,14 +1,12 @@
 package com.myapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -1308795024262635690L;
@@ -22,6 +20,9 @@ public class Person implements Serializable {
 
 	@Column
 	private String lastName;
+
+    @OneToMany
+    private List<Address> addresses;
 
 	public Person() {
 	}
@@ -102,4 +103,11 @@ public class Person implements Serializable {
 		return true;
 	}
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

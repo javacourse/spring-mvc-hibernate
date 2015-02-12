@@ -112,6 +112,7 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 	}
 
 	@Override
+    @Transactional
 	public List<T> findAll() {
         return findByCriteria();
     }
