@@ -1,6 +1,7 @@
 package com.myapp.service.impl;
 
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.model.Company;
 import com.myapp.model.Person;
 import com.myapp.service.api.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,7 @@ public class PersonService implements IPersonService{
         personDao.saveOrUpdate(person);
     }
 
-    public List<Person> getByAge(int age) {
-        return personDao.getByAge(age);
+    public List<Person> getByCompany(Company company) {
+        return personDao.getByCompany(company);
     }
-
 }

@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1>
-	Editing Person ${person.id} - ${person.firstName}  ${person.lastName} 
+	Add new company
 </h1>
-<jsp:include page="modify_tpl.jsp"></jsp:include>
+<jsp:include page="company_modify_tpl.jsp"></jsp:include>
 
 </body>
 </html>

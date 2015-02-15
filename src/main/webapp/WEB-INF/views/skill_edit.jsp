@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1>
-	Add new person
+	Editing Skill ${skill.id} - ${skill.name}
 </h1>
-<jsp:include page="modify_tpl.jsp"></jsp:include>
+<jsp:include page="skill_modify_tpl.jsp"></jsp:include>
 
 </body>
 </html>

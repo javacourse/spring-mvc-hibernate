@@ -1,10 +1,16 @@
 package com.myapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.model.Company;
 import com.myapp.model.Person;
+import com.myapp.model.Skill;
+import com.myapp.service.api.ICompanyService;
 import com.myapp.service.api.IPersonService;
+import com.myapp.service.api.ISkillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +32,16 @@ public class PersonController
 	private static final Logger logger = LoggerFactory
 			.getLogger(PersonController.class);
 
-	@Autowired
 	private IPersonService personService;
+	private ICompanyService companyService;
+	private ISkillService skillService;
+
+	@Autowired
+	public PersonController(IPersonService personService, ICompanyService companyService, ISkillService skillService) {
+		this.personService = personService;
+		this.companyService = companyService;
+		this.skillService = skillService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public ModelAndView listPeople()
@@ -37,9 +51,8 @@ public class PersonController
 		List<Person> people = personService.findAll();
 		logger.debug("Person Listing count = " + people.size());
 		mav.addObject("people", people);
-		mav.setViewName("list");
+		mav.setViewName("person_list");
 		return mav;
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "new")
@@ -50,7 +63,13 @@ public class PersonController
 		Person person = new Person();
 		mav.addObject("person", person);
 
-		mav.setViewName("add");
+		List<Company> companies = companyService.findAll();
+		mav.addObject("companies", companies);
+
+		List<Skill> skills = skillService.findAll();
+		mav.addObject("skillsList", skills);
+
+		mav.setViewName("person_add");
 		return mav;
 
 	}
@@ -63,17 +82,50 @@ public class PersonController
 		Person person = personService.getById(id);
 		mav.addObject("person", person);
 
-		mav.setViewName("edit");
+		List<Company> companies = companyService.findAll();
+		mav.addObject("companies", companies);
+
+		List<Skill> skills = skillService.findAll();
+		mav.addObject("skillsList", skills);
+
+		mav.setViewName("person_edit");
 		return mav;
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
-	public String savePerson(@ModelAttribute("person") Person person)
+	public String savePerson(@ModelAttribute("person") Person person, @RequestParam(value = "compId") String companyId, @RequestParam(value = "skillsVars") String[] skillsVars)
 	{
 		logger.debug("Received postback on person " + person);
+
+		List<Skill> skillsForPerson = new ArrayList<>();
+
+		for (String skill: skillsVars) {
+			System.out.println(skillsVars);
+			skillsForPerson.add(skillService.getById(Long.parseLong(skill)));
+		}
+
+		person.setCompany(companyService.getById(Long.parseLong(companyId)));
+		person.setSkills(skillsForPerson);
+
 		personService.saveOrUpdate(person);
 		return "redirect:list";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "by_company")
+	@ResponseBody
+	public String showByCompany() {
+		StringBuilder strB = new StringBuilder();
+
+		Company company = companyService.getById(2);
+
+		List<Person> persons = personService.getByCompany(company);
+
+		for (Person pers: persons) {
+			strB.append(pers.toString() + "<br/>");
+		}
+
+		return strB.toString();
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -85,15 +137,4 @@ public class PersonController
 				+ ex.getMessage());
 		return ex.getMessage();
 	}
-
-	public IPersonService getPersonDao()
-	{
-		return personService;
-	}
-
-	public void setPersonDao(IPersonService personDao)
-	{
-		this.personService = personDao;
-	}
-
 }

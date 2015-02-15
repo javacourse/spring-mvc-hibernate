@@ -1,48 +1,81 @@
 package com.myapp.model;
 
-import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+
 
 @Entity
+@Table(name = "PERSON")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -1308795024262635690L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "person_id")
 	private Long id;
 
-	@Column
+
+	@ManyToOne(targetEntity = Company.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "company_id")
+	private Company company;
+
+	@ManyToMany(targetEntity = Skill.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinTable(name = "PERSON_SKILL",
+	joinColumns = @JoinColumn(name = "person_id"),
+	inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	private List<Skill> skills = new ArrayList<>();
+
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column
+	@Column(name = "last_name")
 	private String lastName;
 
-	@Column
-	private String age;
+	@Column(name = "age")
+	private Integer age;
 
 	public Person() {
 	}
 
-	public Person(String firstName, String lastName, String age) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
+	public Company getCompany() {
+		return company;
 	}
 
-	public String getAge() {
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -74,7 +107,7 @@ public class Person implements Serializable {
 	public String toString() {
 
 		return super.toString() + " name = " + firstName + " " + lastName
-				+ " id = " + id;
+				+ " age = " + age + " id = " + id;
 	}
 
 	@Override
@@ -113,6 +146,12 @@ public class Person implements Serializable {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (age == null) {
+			if (other.age != null)
+				return false;
+		} else if (!age.equals(other.age))
+			return false;
+
 		return true;
 	}
 

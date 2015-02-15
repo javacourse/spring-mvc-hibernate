@@ -1,5 +1,6 @@
 package com.myapp.service.api;
 
+import com.myapp.model.Company;
 import com.myapp.model.Person;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface IPersonService {
 
     public void saveOrUpdate(Person person);
 
-    public List<Person> getByAge(int age);
+    public List<Person> getByCompany(Company company);
 }

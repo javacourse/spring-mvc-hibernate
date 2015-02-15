@@ -29,10 +29,5 @@ public interface IGenericDAO<T, ID extends Serializable> {
 	
 	void deleteById(ID id);
 
-	List<T> findByCriteria(Criterion... criterion);	
-
-	//boolean isExist(T entity);
-	
-	
-	
+	List<T> findByCriteria(Criterion... criterion);
 }
