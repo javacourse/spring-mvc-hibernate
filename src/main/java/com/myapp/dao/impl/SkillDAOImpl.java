@@ -15,13 +15,5 @@ import java.util.Set;
 @Repository(value = "skillDao")
 @Transactional(readOnly = true)
 public class SkillDAOImpl extends AbstractHibernateDAO<Skill, Long> implements ISkillDAO{
-    @Override
-    public List<Skill> getByName(String name) {
-        return findByCriteria(Restrictions.eq("name", name));
-    }
 
-    @Override
-    public List<Skill> getByPersonName(String personName) {
-        return null;
-    }
 }
