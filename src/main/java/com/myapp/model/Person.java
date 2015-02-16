@@ -71,7 +71,7 @@ public class Person implements Serializable {
 		this.skills = skills;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 

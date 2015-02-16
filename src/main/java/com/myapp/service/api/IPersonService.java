@@ -2,6 +2,7 @@ package com.myapp.service.api;
 
 import com.myapp.model.Company;
 import com.myapp.model.Person;
+import com.myapp.model.Skill;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface IPersonService {
 
     public void saveOrUpdate(Person person);
 
-    public List<Person> getByCompany(Company company);
+    public List<Person> getByCompanyId(Long companyId);
 }

@@ -1,9 +1,13 @@
 package com.myapp.service.impl;
 
+import com.myapp.dao.api.ICompanyDAO;
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.dao.api.ISkillDAO;
 import com.myapp.model.Company;
 import com.myapp.model.Person;
+import com.myapp.model.Skill;
 import com.myapp.service.api.IPersonService;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,12 @@ public class PersonService implements IPersonService{
     @Autowired
     private IPersonDAO personDao;
 
+    @Autowired
+    private ICompanyDAO companyDao;
+
+    @Autowired
+    private ISkillDAO skillDao;
+
     public List<Person> findAll() {
         return personDao.findAll();
     }
@@ -29,7 +39,8 @@ public class PersonService implements IPersonService{
         personDao.saveOrUpdate(person);
     }
 
-    public List<Person> getByCompany(Company company) {
-        return personDao.getByCompany(company);
+    public List<Person> getByCompanyId(Long companyId) {
+        Company company = companyDao.getById(companyId);
+        return personDao.findByCriteria(Restrictions.eq("company", company));
     }
 }

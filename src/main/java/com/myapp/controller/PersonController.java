@@ -117,12 +117,10 @@ public class PersonController
 	public String showByCompany() {
 		StringBuilder strB = new StringBuilder();
 
-		Company company = companyService.getById(2);
-
-		List<Person> persons = personService.getByCompany(company);
+		List<Person> persons = personService.getByCompanyId((long) 2);
 
 		for (Person pers: persons) {
-			strB.append(pers.toString() + "<br/>");
+			strB.append(pers.toString() + "</br>");
 		}
 
 		return strB.toString();
