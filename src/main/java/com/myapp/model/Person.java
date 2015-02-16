@@ -1,12 +1,12 @@
 package com.myapp.model;
 
-import java.io.Serializable;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Person implements Serializable {
@@ -22,6 +22,10 @@ public class Person implements Serializable {
 
 	@Column
 	private String lastName;
+
+	@OneToMany
+	@Fetch(FetchMode.SUBSELECT)
+	private Set<Phone> phones = new HashSet<>(0);
 
 	public Person() {
 	}
@@ -102,4 +106,9 @@ public class Person implements Serializable {
 		return true;
 	}
 
+	public Set<Phone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(Set<Phone> phones) { this.phones = phones; }
 }

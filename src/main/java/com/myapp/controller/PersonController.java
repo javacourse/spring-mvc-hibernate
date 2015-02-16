@@ -1,8 +1,11 @@
 package com.myapp.controller;
 
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.dao.api.IPhoneDAO;
 import com.myapp.model.Person;
+import com.myapp.model.Phone;
 import com.myapp.service.PersonService;
+import com.myapp.service.PhoneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,11 @@ public class PersonController
 	@Autowired
 	private IPersonDAO personDao;
 	@Autowired
+	private IPhoneDAO phoneDAO;
+	@Autowired
 	private PersonService personService;
+	@Autowired
+	private PhoneService phoneService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public ModelAndView listPeople()
@@ -38,6 +45,19 @@ public class PersonController
 		return mav;
 
 	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "addPhone")
+	public ModelAndView addPhone(@RequestParam(value = "id") Long id) {
+		logger.debug("Received request to add new phone for a person ");
+		ModelAndView mav = new ModelAndView();
+		Person person = personService.getPerson(id);
+		mav.addObject("person", person);
+		Phone phone = phoneService.newPhone(person);
+		mav.addObject("phone", phone);
+		mav.setViewName("addPhone");
+		return mav;
+	}
+
 
 	@RequestMapping(method = RequestMethod.GET, value = "new")
 	public ModelAndView addPerson()
@@ -65,7 +85,7 @@ public class PersonController
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
+	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit", "addPhone" })
 	public String savePerson(@ModelAttribute("person") Person person)
 	{
 		logger.debug("Received postback on person " + person);
@@ -101,4 +121,11 @@ public class PersonController
 		this.personDao = personDao;
 	}
 
+	public PhoneService getPhoneService() {
+		return phoneService;
+	}
+
+	public void setPhoneService(PhoneService phoneService) {
+		this.phoneService = phoneService;
+	}
 }
