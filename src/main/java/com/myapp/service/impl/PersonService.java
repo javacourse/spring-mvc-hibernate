@@ -44,7 +44,11 @@ public class PersonService implements IPersonService{
         return personDao.findByCriteria(Restrictions.eq("company", company));
     }
 
-    public List<Person> getBySkill(long id) {
-        return personDao.getBySkill(id);
+    public List<Person> getBySkills(Long ... id) {
+        return personDao.getBySkills(id);
+    }
+
+    public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) {
+        return personDao.getByCompanyAndSkills(companyId, skillId);
     }
 }

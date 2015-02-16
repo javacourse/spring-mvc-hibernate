@@ -17,11 +17,24 @@ import java.util.Set;
 public class PersonDaoImpl extends AbstractHibernateDAO<Person, Long> implements IPersonDAO {
 
     @Override
-    public List<Person> getBySkill(long id) {
+    public List<Person> getBySkills(Long ... id) {
+        String hqlQuery = "select distinct p from Person p join p.skills s where s.id in :id";
 
-        String hqlQuery = "select p from Person p join p.skills s where s.id = :id";
         Query query = getSession().createQuery(hqlQuery);
-        query.setParameter("id", id);
+        query.setParameterList("id", id);
+        List results = query.list();
+
+        return results;
+    }
+
+
+    @Override
+    public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) {
+        String hqlQuery = "select distinct p from Person p join p.skills s join p.company c where c.id = :companyId and s.id in :skillId";
+
+        Query query = getSession().createQuery(hqlQuery);
+        query.setParameter("companyId", companyId);
+        query.setParameterList("skillId", skillId);
         List results = query.list();
 
         return results;

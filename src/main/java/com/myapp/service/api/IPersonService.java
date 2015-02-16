@@ -19,5 +19,7 @@ public interface IPersonService {
 
     public List<Person> getByCompanyId(Long companyId);
 
-    public List<Person> getBySkill(long id);
+    public List<Person> getBySkills(Long ... id);
+
+    public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId);
 }
