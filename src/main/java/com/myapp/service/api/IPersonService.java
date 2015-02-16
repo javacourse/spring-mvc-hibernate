@@ -18,4 +18,6 @@ public interface IPersonService {
     public void saveOrUpdate(Person person);
 
     public List<Person> getByCompanyId(Long companyId);
+
+    public List<Person> getBySkill(long id);
 }

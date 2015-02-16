@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Set;
 
 public interface IPersonDAO extends IGenericDAO<Person, Long> {
-
+    public List<Person> getBySkill(long id);
 }
