@@ -16,7 +16,7 @@
 
 
 	<context:component-scan base-package="com.myapp.dao.impl" />
-
+	<context:component-scan base-package="com.myapp.service.impl" />
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

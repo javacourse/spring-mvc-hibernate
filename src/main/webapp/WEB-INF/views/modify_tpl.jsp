@@ -2,6 +2,10 @@
 <form:form style="padding:8px" modelAttribute="person">
     ID - ${person.id}<br/>
     <p>
+        Dep Id<br/>
+        <form:input path="depId"/>
+    </p>
+    <p>
         First Name<br/>
         <form:input path="firstName"/>
     </p>

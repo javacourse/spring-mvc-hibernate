@@ -1,33 +1,45 @@
 package com.myapp.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Entity
+@Table(name = "Person")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -1308795024262635690L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column
+	@Column (name = "depId", nullable = false)
+	private Long depId;
+	public Long getDepId() {
+		return depId;
+	}
+
+	public void setDepId(Long depId) {
+		this.depId = depId;
+	}
+
+	/*@ManyToOne
+	@JoinColumn(name = "depId")
+	private Departament departament;*/
+
+	@Column (name = "firstName")
 	private String firstName;
 
-	@Column
+	@Column (name = "lastName")
 	private String lastName;
 
 	public Person() {
 	}
 
-	public Person(String firstName, String lastName) {
+	public Person(Long depId, String firstName, String lastName) {
 		super();
+		this.depId = depId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -60,7 +72,7 @@ public class Person implements Serializable {
 	public String toString() {
 
 		return super.toString() + " name = " + firstName + " " + lastName
-				+ " id = " + id;
+				+" depId= "+depId+ " id = " + id;
 	}
 
 	@Override
