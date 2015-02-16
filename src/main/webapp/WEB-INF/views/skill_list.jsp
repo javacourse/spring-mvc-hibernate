@@ -5,7 +5,7 @@
 <title>Home</title>
 </head>
 <body>
-<h1>Listing Skills</h1>
+<h4>Listing Skills</h4>
 <c:forEach items="${skills}" var="v_skill">
 	<a href="edit?id=${v_skill.id}">${v_skill.id} -
 	${v_skill.name}</a>

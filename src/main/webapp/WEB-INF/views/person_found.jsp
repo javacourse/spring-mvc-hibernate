@@ -10,9 +10,16 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title></title>
+    <title>Found persons</title>
 </head>
 <body>
-
+  <h4>
+    Found persons:
+  </h4>
+<c:forEach items="${personList}" var="person">
+  ${person.id} - ${person.lastName} ${person.firstName} ${person.age} <br/>
+</c:forEach>
+  <br/>
+<a href="list">Return to persons list</a>
 </body>
 </html>

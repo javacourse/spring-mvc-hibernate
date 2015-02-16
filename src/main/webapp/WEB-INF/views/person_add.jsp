@@ -6,9 +6,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
+<h4>
 	Add new person
-</h1>
+</h4>
 <jsp:include page="person_modify_tpl.jsp"></jsp:include>
 
 </body>

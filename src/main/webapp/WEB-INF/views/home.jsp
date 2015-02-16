@@ -5,9 +5,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
+<h4>
 	Hello world!
-</h1>
+</h4>
 ${controllerMessage}<br/>
 <br/>
 <br/>

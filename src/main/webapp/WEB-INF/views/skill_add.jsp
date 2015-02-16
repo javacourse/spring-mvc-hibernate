@@ -6,9 +6,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
+<h4>
 	Add new skill
-</h1>
+</h4>
 <jsp:include page="skill_modify_tpl.jsp"></jsp:include>
 
 </body>

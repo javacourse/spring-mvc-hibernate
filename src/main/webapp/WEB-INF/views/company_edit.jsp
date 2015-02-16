@@ -6,9 +6,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
+<h4>
 	Editing Company ${company.id} - ${company.name}
-</h1>
+</h4>
 <jsp:include page="company_modify_tpl.jsp"></jsp:include>
 
 </body>

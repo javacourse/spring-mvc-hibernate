@@ -5,7 +5,7 @@
 <title>Home</title>
 </head>
 <body>
-<h1>Listing Companies</h1>
+<h4>Listing Companies</h4>
 <c:forEach items="${companies}" var="v_company">
 	<a href="edit?id=${v_company.id}">${v_company.id} -
 	${v_company.name}</a>

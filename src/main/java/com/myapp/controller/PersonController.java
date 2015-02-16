@@ -2,9 +2,7 @@ package com.myapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import com.myapp.dao.api.IPersonDAO;
 import com.myapp.model.Company;
 import com.myapp.model.Person;
 import com.myapp.model.Skill;
@@ -112,12 +110,52 @@ public class PersonController
 		return "redirect:list";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "search")
+	public ModelAndView searchPerson() {
+		logger.debug("Received request for person searching");
+		ModelAndView model = new ModelAndView();
+
+		List<Company> companyList = companyService.findAll();
+		model.addObject("companyList", companyList);
+
+		List<Skill> skillList = skillService.findAll();
+		model.addObject("skillList", skillList);
+
+		model.setViewName("person_search");
+		return model;
+	}
+
+	@RequestMapping(method= RequestMethod.GET, value="found")
+	public ModelAndView getFoundPersons(@RequestParam(value="companyId") String companyId, @RequestParam(value="skillsId", required=false) String ... skillsId){
+		logger.debug("Received request for getting found persons list");
+
+		ModelAndView model = new ModelAndView();
+		List<Person> personList;
+
+		if (skillsId != null) {
+			Long[] skillsIdParams = new Long[skillsId.length];
+
+			for (int i = 0; i < skillsIdParams.length; i++) {
+				skillsIdParams[i] = Long.parseLong(skillsId[i]);
+			}
+
+
+			personList = personService.getByCompanyAndSkills(Long.parseLong(companyId), skillsIdParams);
+		} else {
+			personList = personService.getByCompanyId(Long.parseLong(companyId));
+		}
+
+		model.addObject("personList", personList);
+
+		model.setViewName("person_found");
+		return model;
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "by_company")
 	@ResponseBody
 	public String showByCompany() {
 		StringBuilder strB = new StringBuilder();
 
-		//List<Person> persons = personService.getByCompanyId((long) 2);
 		List<Person> persons = personService.getByCompanyAndSkills(Long.valueOf(2), Long.valueOf(1));
 
 		for (Person pers: persons) {
