@@ -151,20 +151,6 @@ public class PersonController
 		return model;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "by_company")
-	@ResponseBody
-	public String showByCompany() {
-		StringBuilder strB = new StringBuilder();
-
-		List<Person> persons = personService.getByCompanyAndSkills(Long.valueOf(2), Long.valueOf(1));
-
-		for (Person pers: persons) {
-			strB.append(pers.toString() + "</br>");
-		}
-
-		return strB.toString();
-	}
-
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public String handleException(Exception ex)
