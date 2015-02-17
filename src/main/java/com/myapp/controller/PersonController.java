@@ -94,8 +94,7 @@ public class PersonController
 	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
 	public String savePerson(@ModelAttribute("person") Person person,
 							 @RequestParam(value = "compId") String companyId,
-							 @RequestParam(value = "skillsVars") String[] skillsVars)
-	{
+							 @RequestParam(value = "skillsVars") String[] skillsVars) {
 		logger.debug("Received postback on person " + person);
 
 		List<Skill> skillsForPerson = new ArrayList<>();
@@ -127,7 +126,8 @@ public class PersonController
 	}
 
 	@RequestMapping(method= RequestMethod.GET, value="found")
-	public ModelAndView getFoundPersons(@RequestParam(value="companyId") String companyId, @RequestParam(value="skillsId", required=false) String ... skillsId){
+	public ModelAndView getFoundPersons(@RequestParam(value="companyId") String companyId,
+										@RequestParam(value="skillsId", required=false) String ... skillsId){
 		logger.debug("Received request for getting found persons list");
 
 		ModelAndView model = new ModelAndView();
