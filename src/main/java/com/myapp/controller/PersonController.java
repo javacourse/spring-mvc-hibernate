@@ -92,14 +92,15 @@ public class PersonController
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
-	public String savePerson(@ModelAttribute("person") Person person, @RequestParam(value = "compId") String companyId, @RequestParam(value = "skillsVars") String[] skillsVars)
+	public String savePerson(@ModelAttribute("person") Person person,
+							 @RequestParam(value = "compId") String companyId,
+							 @RequestParam(value = "skillsVars") String[] skillsVars)
 	{
 		logger.debug("Received postback on person " + person);
 
 		List<Skill> skillsForPerson = new ArrayList<>();
 
 		for (String skill: skillsVars) {
-			System.out.println(skillsVars);
 			skillsForPerson.add(skillService.getById(Long.parseLong(skill)));
 		}
 
