@@ -11,22 +11,36 @@ public class Person implements Serializable {
 
 
 	@Id
+	@Column (name = "personId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column (name = "depId", nullable = false)
+/*
+	@Column (name = "departamentId", nullable = false)
 	private Long depId;
 	public Long getDepId() {
 		return depId;
 	}
-
 	public void setDepId(Long depId) {
 		this.depId = depId;
 	}
+*/
+
+	//@JoinTable(name = "Departament", joinColumns = @JoinColumn(name = "depId"), inverseJoinColumns = @JoinColumn(name = "ID_STUDENT"))
+
+
+	//@Column (name = "departamentId", nullable = false)
+	@ManyToOne(targetEntity = Departament.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "departamentId",nullable = false)
+	private Departament departament;
 
 	/*@ManyToOne
-	@JoinColumn(name = "depId")
+	@JoinColumn(name = "departamentId")
 	private Departament departament;*/
+
+	public Departament getDepartament() {return departament; }
+	public void setDepartament(Departament departament) {this.departament = departament;}
+
 
 	@Column (name = "firstName")
 	private String firstName;
@@ -37,9 +51,11 @@ public class Person implements Serializable {
 	public Person() {
 	}
 
-	public Person(Long depId, String firstName, String lastName) {
-		super();
-		this.depId = depId;
+	public Person(Departament departament,/* Long departamentId,*/ String firstName, String lastName) {
+		//super();
+		//this.departamentId = departamentId;
+
+		this.departament = departament;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -72,7 +88,7 @@ public class Person implements Serializable {
 	public String toString() {
 
 		return super.toString() + " name = " + firstName + " " + lastName
-				+" depId= "+depId+ " id = " + id;
+				+ " id = " + id;
 	}
 
 	@Override

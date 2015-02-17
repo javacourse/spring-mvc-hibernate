@@ -1,5 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
 <title>Home</title>
@@ -17,7 +18,7 @@
 	<c:forEach items="${people}" var="v_person">
 		<tr>
 			<td>${v_person.id}</td>
-			<td><a href="edit?id=${v_person.id}">${v_person.depId}</a></td>
+			<td> xxx</td>
 			<td><a href="edit?id=${v_person.id}">${v_person.firstName}</a></td>
 			<td><a href="edit?id=${v_person.id}">${v_person.lastName}</a></td>
 			<td><a href="del?id=${v_person.id}">del</a></td>

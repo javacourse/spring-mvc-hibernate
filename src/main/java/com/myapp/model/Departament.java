@@ -2,6 +2,7 @@ package com.myapp.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Departament")
@@ -9,30 +10,34 @@ public class Departament implements Serializable {
 
     private static final long serialVersionUID = -1308795024262635690L;
 
-    @Id @Column(name="depId")
+    @Id
+    @Column (name = "departamentId")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long depId;
+    private Long id;
+
+    /*@OneToMany(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departament")
+    private List<Person> persons;*/
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departamentId")
+    private List<Person> persons;
 
     @Column
     private String depName;
-
-    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "Departament")
-    private List<Departament> list;*/
 
     public Departament() {
     }
 
     public Departament(String depName) {
-        super();
+        //super();
         this.depName = depName;
     }
 
-    public Long getDepId() {
-        return depId;
+    public Long getId() {
+        return id;
     }
 
-    public void setDepId(Long depId) {
-        this.depId = depId;
+    public void setId(Long Id) {
+        this.id = id;
     }
 
     public String getDepName() {
@@ -43,10 +48,17 @@ public class Departament implements Serializable {
         this.depName = depName;
     }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
     @Override
     public String toString() {
 
-       return super.toString() + " Departament = " + depName + " depId = " + depId;
+       return super.toString() + " Departament = " + depName + " id = " + id;
     }
 
     @Override
@@ -55,7 +67,7 @@ public class Departament implements Serializable {
         int result = 1;
         result = prime * result
                 + ((depName == null) ? 0 : depName.hashCode());
-        result = prime * result + ((depId == null) ? 0 : depId.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -73,10 +85,10 @@ public class Departament implements Serializable {
                 return false;
         } else if (!depName.equals(other.depName))
             return false;
-        if (depId == null) {
-            if (other.depId != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!depId.equals(other.depId))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
