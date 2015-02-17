@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <form:form style="padding:8px" modelAttribute="person">
     ID - ${person.id}<br/>
-    
+
     <p>
         Departament<br/>
         <select name="departamentId">
