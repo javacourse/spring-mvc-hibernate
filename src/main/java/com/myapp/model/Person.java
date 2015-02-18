@@ -24,7 +24,7 @@ public class Person implements Serializable {
 	private String lastName;
 
 	@OneToMany
-	@Fetch(FetchMode.SUBSELECT)
+	@Fetch(FetchMode.JOIN)
 	private Set<Phone> phones = new HashSet<>(0);
 
 	public Person() {

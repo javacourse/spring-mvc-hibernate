@@ -17,7 +17,8 @@ public class Phone implements Serializable {
     @Column
     private String number;
 
-    @Column
+    @ManyToOne
+    @JoinColumn
     private Person person;
 
     public Phone() {}
@@ -45,8 +46,6 @@ public class Phone implements Serializable {
         this.number = number;
     }
 
-    @ManyToOne
-    @JoinColumn
     public Person getPerson() { return person; }
     public void setPerson(Person person) { this.person = person; }
 
