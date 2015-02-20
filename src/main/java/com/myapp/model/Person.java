@@ -8,39 +8,16 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -1308795024262635690L;
-
+    //private String depName;
 
 	@Id
 	@Column (name = "personId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-/*
-	@Column (name = "departamentId", nullable = false)
-	private Long depId;
-	public Long getDepId() {
-		return depId;
-	}
-	public void setDepId(Long depId) {
-		this.depId = depId;
-	}
-*/
-
-	//@JoinTable(name = "Departament", joinColumns = @JoinColumn(name = "depId"), inverseJoinColumns = @JoinColumn(name = "ID_STUDENT"))
-
-
-	//@Column (name = "departamentId", nullable = false)
-	@ManyToOne(targetEntity = Departament.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "departamentId",nullable = false)
 	private Departament departament;
-
-	/*@ManyToOne
-	@JoinColumn(name = "departamentId")
-	private Departament departament;*/
-
-	public Departament getDepartament() {return departament; }
-	public void setDepartament(Departament departament) {this.departament = departament;}
-
 
 	@Column (name = "firstName")
 	private String firstName;
@@ -51,9 +28,7 @@ public class Person implements Serializable {
 	public Person() {
 	}
 
-	public Person(Departament departament,/* Long departamentId,*/ String firstName, String lastName) {
-		//super();
-		//this.departamentId = departamentId;
+	public Person(Departament departament, String firstName, String lastName) {
 
 		this.departament = departament;
 		this.firstName = firstName;
@@ -83,6 +58,8 @@ public class Person implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public Departament getDepartament() {return departament; }
+	public void setDepartament(Departament departament) {this.departament = departament;}
 
 	@Override
 	public String toString() {

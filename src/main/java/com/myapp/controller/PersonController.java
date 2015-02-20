@@ -47,10 +47,10 @@ public class PersonController
 		List<Person> people = personService.people();
 		logger.debug("Person Listing count = " + people.size());
 
-/*
-		for(Person f: people) {
-			logger.debug("Received request person.Id= " + f.getId()+" getFirstName= " + f.getFirstName() + " departament  = "+ f.d getDepartament().getDepName());
-		}*/
+
+//		for(Person f: people) {
+//			logger.debug("Received request person.Id= " + f.getId()+" getFirstName= " + f.getFirstName() + " departament  = " +f.getDepartament().getDepName());
+//		}
 		mav.addObject("people", people);
 		mav.setViewName("list");
 		return mav;
@@ -65,12 +65,11 @@ public class PersonController
 
 		List<Departament> departaments = departamentService.list();
 
-		for(Departament f: departaments) {
-			logger.debug("Received request to add new person into combobox " + f.getDepName());
-		}
+//		for(Departament f: departaments) {
+//			logger.debug("Received request to add new person into combobox " + f.getDepName());
+//		}
 
 		mav.addObject("departaments", departaments);
-		//mav.setAttribute("objectValues",objectValues , PageContext.REQUEST_SCOPE);
 		mav.addObject("test", "testtest1111");
 		mav.setViewName("add");
 		return mav;
@@ -79,8 +78,12 @@ public class PersonController
 	public ModelAndView editPerson(@RequestParam(value = "id") Long id)
 	{
 		logger.debug("Received request to edit person id : " + id);
+
 		ModelAndView mav = new ModelAndView();
 		Person person = personService.getPerson(id);
+
+		logger.debug("Received request person.Id= " + person.getId()+" getFirstName= " + person.getFirstName() + " departament  = " +person.getDepartament().getDepName());
+
 		mav.addObject("person", person);
 
 		List<Departament> departaments = departamentService.list();
@@ -89,17 +92,6 @@ public class PersonController
 		mav.setViewName("edit");
 		return mav;
 	}
-/*
-	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
-	public String savePerson(@ModelAttribute("person") Person person)
-	{
-		logger.debug("Received postback on person " + person);
-
-
-		personService.savePerson(person);
-		return "redirect:list";
-	}*/
-	//!!!!!!
 
 	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
 	public String savePerson(@ModelAttribute("person") Person person,

@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>
-	Editing Person ${person.id} - xxx  ${person.firstName}  ${person.lastName}
+	Editing Person ${person.id} - ${person.getDepartament().getDepName()}  ${person.firstName}  ${person.lastName}
 </h1>
 <jsp:include page="modify_tpl.jsp"></jsp:include>
 

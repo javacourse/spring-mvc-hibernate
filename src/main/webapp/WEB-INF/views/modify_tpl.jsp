@@ -7,9 +7,18 @@
         Departament<br/>
         <select name="departamentId">
             <c:forEach items="${departaments}" var="departament">
-                <option value="${departament.id}">
-                        ${departament.depName}
-                </option>
+                <c:choose>
+                    <c:when test="${departament.id == person.getDepartament().getId()}">
+                        <option value="${departament.id}" selected>
+                                ${departament.depName}
+                        </option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${departament.id}">
+                                ${departament.depName}
+                        </option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select>
     </p>
