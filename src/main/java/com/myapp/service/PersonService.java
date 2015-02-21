@@ -13,6 +13,7 @@ import java.util.List;
         public Person getPerson(long id);
         public void savePerson(Person person);
         public void deletePerson(long id);
+        public List<Person> getByDepartamentId(long id);
     }
 
 

@@ -15,8 +15,6 @@ public class Departament implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /*@OneToMany(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departament")
-    private List<Person> persons;*/
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "departamentId")
     private List<Person> persons;

@@ -1,0 +1,33 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true"%>
+<html>
+<head>
+  <title>Search</title>
+</head>
+<body>
+<h1>Found People</h1>
+<table>
+  <tr class="panel">
+    <td>id</td>
+    <td align="center">Dep id</td>
+    <td align="center">Dep Name</td>
+    <td align="center">First Name</td>
+    <td align="center">Last Name</td>
+    <td></td>
+  </tr>
+  <c:forEach items="${people}" var="v_person">
+    <tr>
+      <td>${v_person.id}</td>
+      <td><a href="edit?id=${v_person.id}">${v_person.getDepartament().getId()}</a></td>
+      <td><a href="edit?id=${v_person.id}">${v_person.getDepartament().getDepName()}</a></td>
+      <td><a href="edit?id=${v_person.id}">${v_person.firstName}</a></td>
+      <td><a href="edit?id=${v_person.id}">${v_person.lastName}</a></td>
+      <td><a href="del?id=${v_person.id}">del</a></td>
+    </tr>
+  </c:forEach>
+</table>
+<a href="list">Return to persons list</a><br/>
+<a href="search"> reRun Search Person</a> <br/>
+</body>
+</html>

@@ -20,7 +20,8 @@
   </tr>
   </c:forEach>
 </table>
-<a href="new"> Add Department</a>
+<a href="new"> Add Department</a> <br/>
+<a href="/person/list">List of People</a>
 <br>
 </body>
 </html>

@@ -1,9 +1,14 @@
 package com.myapp.service.impl;
+
+import com.myapp.dao.api.IDepartamentDAO;
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.model.Departament;
 import com.myapp.model.Person;
 import com.myapp.service.PersonService;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 /**
  * Created by ragham
@@ -16,6 +21,10 @@ public class PersonServiceImpl implements PersonService {
     public PersonServiceImpl(IPersonDAO personDao) {
         this.personDao = personDao;
     }
+
+    @Autowired
+    private IDepartamentDAO departamentDAO;
+
     @Override
     public List<Person> people() {
         return personDao.findAll();
@@ -34,5 +43,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void deletePerson(long id) {
         personDao.deleteById(id);
+    }
+    @Override
+    public List<Person> getByDepartamentId(long id) {
+
+            Departament departament = departamentDAO.getById(id);
+            return personDao.findByCriteria(Restrictions.eq("departament", departament));
+
     }
 }

@@ -16,8 +16,6 @@ public class DepartamentDaoImpl extends AbstractHibernateDAO<Departament, Long> 
     @Override
     public boolean isExist(Departament entity)
     {
-//test
-//		return !findByCriteria(Restrictions.eq("name", entity.getName())).isEmpty();
         return false;
     }
 

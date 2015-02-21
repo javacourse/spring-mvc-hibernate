@@ -27,6 +27,8 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href="new"> Add Person</a>
+<a href="new"> Add Person</a> <br/>
+<a href="search"> Find Person</a> <br/>
+<a href="/department/list">to List of Departament</a>
 </body>
 </html>

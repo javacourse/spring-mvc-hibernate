@@ -32,13 +32,6 @@ public class PersonController
 		this.departamentService = departamentService;
 	}
 
-	/*@Autowired
-	private IPersonDAO personDao;
-	@Autowired
-	private PersonService personService;
-	@Autowired
-	private DepartamentService departamentService;*/
-
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public ModelAndView listPeople()
 	{
@@ -47,10 +40,6 @@ public class PersonController
 		List<Person> people = personService.people();
 		logger.debug("Person Listing count = " + people.size());
 
-
-//		for(Person f: people) {
-//			logger.debug("Received request person.Id= " + f.getId()+" getFirstName= " + f.getFirstName() + " departament  = " +f.getDepartament().getDepName());
-//		}
 		mav.addObject("people", people);
 		mav.setViewName("list");
 		return mav;
@@ -64,10 +53,6 @@ public class PersonController
 		mav.addObject("person", person);
 
 		List<Departament> departaments = departamentService.list();
-
-//		for(Departament f: departaments) {
-//			logger.debug("Received request to add new person into combobox " + f.getDepName());
-//		}
 
 		mav.addObject("departaments", departaments);
 		mav.addObject("test", "testtest1111");
@@ -104,9 +89,26 @@ public class PersonController
 		return "redirect:list";
 	}
 
-	//!!!
+	@RequestMapping(method = RequestMethod.GET, value = "search")
+	public ModelAndView searchPerson() {
+		logger.debug("Received request for person searching");
+		ModelAndView model = new ModelAndView();
+		List<Departament> departaments = departamentService.list();
+		model.addObject("departaments", departaments);
+		model.setViewName("search");
+		return model;
+	}
 
-
+	@RequestMapping(method= RequestMethod.GET, value="found")
+	public ModelAndView getFoundPersons(@RequestParam(value="departamentId") String departamentId){
+		logger.debug("Received request for getting found persons list");
+		ModelAndView model = new ModelAndView();
+		List<Person> people;
+		people = personService.getByDepartamentId(Long.parseLong(departamentId));
+		model.addObject("people", people);
+		model.setViewName("found");
+		return model;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "del")
 	public String deletePerson(@RequestParam(value = "id") Long id)
