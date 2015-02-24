@@ -5,20 +5,16 @@ import com.myapp.model.Person;
 import com.myapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by Toshiba on 11.02.2015.
- */
 @Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private IPersonDAO personDao;
 
-    @Transactional
     public List<Person> findAll(){
         return   personDao.findAll();
     }
@@ -28,4 +24,18 @@ public class PersonServiceImpl implements PersonService {
     public void saveOrUpdate(Person person){
          personDao.saveOrUpdate(person);
     }
+
+    @Override
+    public void deletePerson(Long id) {
+        personDao.deleteById(id);
+    }
+
+    @Override
+    public List<Person> searchByParams(Map<String, String> searchParams) {
+        String firstName = (String) searchParams.get("firstName");
+        String city = (String) searchParams.get("city");
+
+        return personDao.searchByParams(firstName, city);
+    }
+
 }

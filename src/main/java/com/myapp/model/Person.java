@@ -1,7 +1,11 @@
 package com.myapp.model;
 
+import org.hibernate.annotations.Cascade;
+
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -21,8 +25,8 @@ public class Person implements Serializable {
 	@Column
 	private String lastName;
 
-    @OneToMany
-    private List<Address> addresses;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person",   cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, orphanRemoval = true)
+	private Set<Address> addresses = new HashSet<Address>();
 
 	public Person() {
 	}
@@ -103,11 +107,11 @@ public class Person implements Serializable {
 		return true;
 	}
 
-    public List<Address> getAddresses() {
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 }

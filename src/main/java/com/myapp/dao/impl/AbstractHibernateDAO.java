@@ -127,7 +127,7 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
         for (Criterion c : criterion) {
             crit.add(c);
         }
-        return crit.list();
+        return crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
    }
     
    

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/person/")
@@ -33,7 +34,6 @@ public class PersonController
 		mav.addObject("people", people);
 		mav.setViewName("list");
 		return mav;
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "new")
@@ -43,10 +43,8 @@ public class PersonController
 		ModelAndView mav = new ModelAndView();
 		Person person = new Person();
 		mav.addObject("person", person);
-
 		mav.setViewName("add");
 		return mav;
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "edit")
@@ -56,7 +54,6 @@ public class PersonController
 		ModelAndView mav = new ModelAndView();
 		Person person = personService.getById(id);
 		mav.addObject("person", person);
-
 		mav.setViewName("edit");
 		return mav;
 
@@ -69,6 +66,23 @@ public class PersonController
 		personService.saveOrUpdate(person);
 		return "redirect:list";
 	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "delete")
+	public String deletePerson(@RequestParam(value = "id") Long id)
+	{
+		personService.deletePerson(id);
+		return "redirect:list";
+	}
+
+    @RequestMapping(method = RequestMethod.GET, value = "search")
+    public ModelAndView searchPerson(@RequestParam Map<String, String> searchParams){
+        ModelAndView mav = new ModelAndView();
+        List<Person> people = personService.searchByParams(searchParams);
+        mav.addObject("people", people);
+        mav.addObject("searchParams", searchParams);
+        mav.setViewName("list");
+        return mav;
+    }
 
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
