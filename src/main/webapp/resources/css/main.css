@@ -1,0 +1,55 @@
+body {
+    magrin: 0 auto;
+    color: maroon;
+}
+
+#container {
+    margin: 0 auto;
+    border: darkred solid 2px;
+    width: 900px;
+    background: lightcoral;
+    padding: 10px;
+}
+
+#header {
+    border: darkred solid 2px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+#sidebar {
+    margin-top: 10px;
+    width: 200px;
+    border: darkred solid 2px;
+    padding: 5px;
+    float: left;
+}
+
+#content {
+    margin-top: 10px;
+    margin-left: 223px;
+    border: darkred solid 2px;
+    padding: 5px;
+}
+
+#footer {
+    clear: left;
+}
+
+body a{
+    text-decoration: none;
+    color: maroon;
+}
+
+body a:visited {
+    color: maroon;
+}
+
+body a:active {
+    color: maroon;
+}
+
+body a:hover {
+    color: maroon;
+    text-decoration: underline;
+}

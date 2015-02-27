@@ -51,4 +51,8 @@ public class PersonService implements IPersonService{
     public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) {
         return personDao.getByCompanyAndSkills(companyId, skillId);
     }
+
+    public void deleteById(Long id) {
+        personDao.deleteById(id);
+    }
 }

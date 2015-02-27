@@ -1,15 +1,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Odour
+  Date: 27.02.2015
+  Time: 11:17
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title>Home</title>
+    <title></title>
+<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<h4>
-	Editing Person ${person.id} - ${person.firstName}  ${person.lastName} 
-</h4>
-<jsp:include page="person_modify_tpl.jsp"></jsp:include>
-
+<div id="container">
+  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="sidebar.jsp"></jsp:include>
+  <div id="content">
+    <jsp:include page="person_modify_tpl.jsp"></jsp:include>
+  </div>
+  <jsp:include page="footer.jsp"></jsp:include>
+  </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ public class HomeController
 	/**
 	 * Selects the home page and populates the model with a message
 	 */
-	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home"/*, "/index"*/ }, method = RequestMethod.GET)
 	public String home(Model model)
 	{
 		logger.info("Welcome home!");

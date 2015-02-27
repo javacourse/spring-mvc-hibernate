@@ -33,11 +33,11 @@ public class Person implements Serializable {
 	private Long id;
 
 
-	@ManyToOne(targetEntity = Company.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Company.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-	@ManyToMany(targetEntity = Skill.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@ManyToMany(targetEntity = Skill.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "PERSON_SKILL",
 	joinColumns = @JoinColumn(name = "person_id"),
 	inverseJoinColumns = @JoinColumn(name = "skill_id"))

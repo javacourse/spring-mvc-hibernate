@@ -18,14 +18,7 @@
   <jsp:include page="header.jsp"></jsp:include>
   <jsp:include page="sidebar.jsp"></jsp:include>
   <div id="content">
-    <h4>
-      Found persons:
-    </h4>
-    <c:forEach items="${personList}" var="person">
-      <a href="info?id=${person.id}">${person.id} - ${person.lastName} ${person.firstName}</a> <br/>
-    </c:forEach>
-    <br/>
-    <a href="search">Return to searching</a>
+    Content
   </div>
   <jsp:include page="footer.jsp"></jsp:include>
   </div>

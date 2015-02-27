@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/person/")
-public class PersonController
-{
+public class PersonController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(PersonController.class);
@@ -50,10 +50,30 @@ public class PersonController
 		logger.debug("Person Listing count = " + people.size());
 		mav.addObject("people", people);
 		mav.setViewName("person_list");
+
+		for (Person per: people) {
+			System.out.println(per.toString());
+		}
+
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "new")
+	@RequestMapping(method = RequestMethod.GET, value = "info")
+	public ModelAndView showPersonInfo(@RequestParam(value = "id") Long id) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		if (id == null) throw new Exception();
+
+		Person personInfo = personService.getById(id);
+		mav.addObject("personInfo", personInfo);
+
+		mav.setViewName("person_info");
+
+	//	System.out.println(personInfo.getCompany().getName());
+
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "add")
 	public ModelAndView addPerson()
 	{
 		logger.debug("Received request to add new person ");
@@ -91,11 +111,26 @@ public class PersonController
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit" })
+	@RequestMapping(method = RequestMethod.POST, value = "delete")
+	public String deletePerson(@RequestParam(value = "id") Long id) throws Exception {
+		if (id == null) {
+			throw new Exception();
+		}
+
+		personService.deleteById(id);
+
+		return "redirect:list";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = { "add", "edit" })
 	public String savePerson(@ModelAttribute("person") Person person,
 							 @RequestParam(value = "compId") String companyId,
-							 @RequestParam(value = "skillsVars") String[] skillsVars) {
+							 @RequestParam(value = "skillsVars") String[] skillsVars) throws Exception {
 		logger.debug("Received postback on person " + person);
+
+		if (person == null || companyId == null || skillsVars == null) {
+			throw new Exception();
+		}
 
 		List<Skill> skillsForPerson = new ArrayList<>();
 

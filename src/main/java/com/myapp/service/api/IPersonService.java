@@ -19,4 +19,6 @@ public interface IPersonService {
     public List<Person> getBySkills(Long ... id);
 
     public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId);
+
+    public void deleteById(Long id);
 }

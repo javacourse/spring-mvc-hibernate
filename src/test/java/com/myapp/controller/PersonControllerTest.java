@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
-@ContextConfiguration({"/db.xml", "file:servlet-context.xml"})
+@ContextConfiguration({"/db.xml", "file:/servlet-context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional()
 @Ignore
@@ -28,7 +28,6 @@ public class PersonControllerTest
 
 	@Autowired
 	private DataInitializer dataInitializer;
-
 
 	@Autowired
 	private PersonController personController;
@@ -68,7 +67,6 @@ public class PersonControllerTest
 	@Test
 	public void shouldReturnSecondPersonWithEditMav()
 	{
-
 		Long templateId = dataInitializer.people.get(1);
 		ModelAndView mav = personController.editPerson(templateId);
 		assertNotNull(mav);
