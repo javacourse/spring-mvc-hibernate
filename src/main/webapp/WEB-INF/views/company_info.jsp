@@ -4,14 +4,14 @@
   Created by IntelliJ IDEA.
   User: Odour
   Date: 27.02.2015
-  Time: 11:17
+  Time: 14:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
-<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css"/>
+  <title></title>
+  <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="container">
@@ -19,15 +19,28 @@
   <jsp:include page="sidebar.jsp"></jsp:include>
 
   <div id="content">
-    <h4>Listing Companies</h4>
-    <c:forEach items="${companies}" var="v_company">
-      <a href="info?id=${v_company.id}">${v_company.id} -
-          ${v_company.name}</a>
-      <br />
-    </c:forEach>
+    <h4>
+      Person information
+    </h4>
+    Company id: #${company.id} <br/>
+    Company name: ${company.name} <br/>
+  <p>    <table>
+    <tr>
+      <td>
+        <form action="edit" method="get">
+          <input type="hidden" name="id" value="${company.id}">
+          <input type="submit" value="Edit">
+        </form>
+      </td>
+      <td>
+    </tr>
+  </table>
+    </p>
+
+
   </div>
 
   <jsp:include page="footer.jsp"></jsp:include>
-  </div>
+</div>
 </body>
 </html>

@@ -30,23 +30,24 @@
     <c:forEach items="${personInfo.skills}" var="skill">
       ${skill.name}
     </c:forEach>
-  <br/>
-    <table>
-      <tr>
-        <td>
-          <form action="edit" method="get">
-            <input type="hidden" name="id" value="${personInfo.id}">
+  <p>    <table>
+    <tr>
+      <td>
+        <form action="edit" method="get">
+          <input type="hidden" name="id" value="${personInfo.id}">
           <input type="submit" value="Edit">
         </form>
-        </td>
-        <td>
-          <form action="delete" method="post">
-            <input type="hidden" name="id" value="${personInfo.id}">
-            <input type="submit" value="Delete">
-          </form>
-        </td>
-      </tr>
-    </table>
+      </td>
+      <td>
+        <form action="delete" method="post">
+          <input type="hidden" name="id" value="${personInfo.id}">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+  </table>
+    </p>
+
 
   </div>
 

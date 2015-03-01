@@ -25,7 +25,7 @@ public class CompanyService implements ICompanyService{
         companyDao.saveOrUpdate(company);
     }
 
-    public Company getById(long id) {
+    public Company getById(Long id) {
         return companyDao.getById(id);
     }
 }

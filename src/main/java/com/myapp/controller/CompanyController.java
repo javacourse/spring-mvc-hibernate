@@ -40,7 +40,20 @@ public class CompanyController {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "new")
+    @RequestMapping(method = RequestMethod.GET, value="info")
+    public ModelAndView showCompanyInfo(@RequestParam(value = "id") Long companyId) throws Exception {
+        if (companyId == null) throw new Exception();
+
+        ModelAndView mav = new ModelAndView();
+
+        Company company = companyService.getById(companyId);
+        mav.addObject("company", company);
+        mav.setViewName("company_info");
+
+        return mav;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "add")
     public ModelAndView addCompany() {
         logger.debug("Received request to add new company");
         ModelAndView model = new ModelAndView();
@@ -53,8 +66,9 @@ public class CompanyController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "edit")
-    public ModelAndView editCompany(@RequestParam(value = "id") long id) {
+    public ModelAndView editCompany(@RequestParam(value = "id") Long id) throws Exception {
         logger.debug("Received request to edit company id : " + id);
+        if (id == null) throw new Exception();
         ModelAndView model = new ModelAndView();
 
         Company company = companyService.getById(id);
@@ -64,7 +78,7 @@ public class CompanyController {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = {"new", "edit"})
+    @RequestMapping(method = RequestMethod.POST, value = {"add", "edit"})
     public String saveCompany(@ModelAttribute("company") Company company) {
         logger.debug("Received postback on company " + company);
         companyService.saveOrUpdate(company);

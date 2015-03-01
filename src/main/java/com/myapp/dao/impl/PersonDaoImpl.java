@@ -35,6 +35,7 @@ public class PersonDaoImpl extends AbstractHibernateDAO<Person, Long> implements
 
     @Override
     public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) {
+
         if (skillId.length == 0) {
             String hqlQuery = "select distinct p from Person p join p.skills s join p.company c where c.id = :companyId";
 

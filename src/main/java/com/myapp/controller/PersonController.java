@@ -51,9 +51,9 @@ public class PersonController {
 		mav.addObject("people", people);
 		mav.setViewName("person_list");
 
-		for (Person per: people) {
+		/*for (Person per: people) {
 			System.out.println(per.toString());
-		}
+		}*/
 
 		return mav;
 	}
@@ -162,8 +162,10 @@ public class PersonController {
 
 	@RequestMapping(method= RequestMethod.GET, value="found")
 	public ModelAndView getFoundPersons(@RequestParam(value="companyId") String companyId,
-										@RequestParam(value="skillsId", required=false) String ... skillsId){
+										@RequestParam(value="skillsId", required=false) String ... skillsId) throws Exception {
 		logger.debug("Received request for getting found persons list");
+
+		if (companyId == null) throw new Exception();
 
 		ModelAndView model = new ModelAndView();
 		List<Person> personList;

@@ -15,7 +15,7 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
-    @OneToMany(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(targetEntity = Person.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "company")
     private List<Person> persons;
 
 

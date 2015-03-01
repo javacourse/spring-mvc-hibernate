@@ -27,10 +27,10 @@
     <li>Company
       <ul>
         <li>
-          <a href="">List</a>
+          <a href="/company/list">List</a>
         </li>
         <li>
-          <a href="">Add</a>
+          <a href="/company/add">Add</a>
         </li>
       </ul>
     </li>

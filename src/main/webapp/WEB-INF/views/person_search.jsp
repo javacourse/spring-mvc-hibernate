@@ -39,7 +39,10 @@
         <input type="checkbox" value="${v_skill.id}" name="skillsId">
         ${v_skill.name}<br/>
       </c:forEach>
-      <input type="submit" value="Find">
+      <p>
+        <input type="submit" value="Find">
+      </p>
+
     </form:form>
   </div>
 
