@@ -1,7 +1,5 @@
 package com.myapp.controller;
 
-import com.myapp.dao.api.IPersonDAO;
-import com.myapp.dao.api.IPhoneDAO;
 import com.myapp.model.Person;
 import com.myapp.model.Phone;
 import com.myapp.service.PersonService;
@@ -24,10 +22,6 @@ public class PersonController
 	private static final Logger logger = LoggerFactory
 			.getLogger(PersonController.class);
 
-	@Autowired
-	private IPersonDAO personDao;
-	@Autowired
-	private IPhoneDAO phoneDAO;
 	@Autowired
 	private PersonService personService;
 	@Autowired
@@ -109,16 +103,6 @@ public class PersonController
 		logger.warn(ClassUtils.getShortName(ex.getClass()) + " -- "
 				+ ex.getMessage());
 		return ex.getMessage();
-	}
-
-	public IPersonDAO getPersonDao()
-	{
-		return personDao;
-	}
-
-	public void setPersonDao(IPersonDAO personDao)
-	{
-		this.personDao = personDao;
 	}
 
 	public PhoneService getPhoneService() {

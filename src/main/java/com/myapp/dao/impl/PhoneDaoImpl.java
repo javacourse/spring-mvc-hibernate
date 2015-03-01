@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Date: 2/16/2015
  */
 
-@Repository("PhoneDAO")
+@Repository("phoneDao")
 @Transactional(readOnly = true)
 public class PhoneDaoImpl extends AbstractHibernateDAO<Phone, Long> implements IPhoneDAO{
     @Override

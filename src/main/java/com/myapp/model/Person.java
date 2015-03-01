@@ -5,8 +5,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Person implements Serializable {
@@ -15,6 +14,7 @@ public class Person implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "personId")
 	private Long id;
 
 	@Column
@@ -23,17 +23,21 @@ public class Person implements Serializable {
 	@Column
 	private String lastName;
 
-	@OneToMany
-	@Fetch(FetchMode.JOIN)
-	private Set<Phone> phones = new HashSet<>(0);
+	@ManyToOne
+	@JoinColumn(name = "departmentId", nullable = false)
+	private Department department;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinColumn(name = "personId")
+	private List<Phone> phones;
 
 	public Person() {
 	}
 
-	public Person(String firstName, String lastName) {
+	public Person(Department department) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.department = department;
 	}
 
 	public Long getId() {
@@ -106,9 +110,9 @@ public class Person implements Serializable {
 		return true;
 	}
 
-	public Set<Phone> getPhones() {
+	public List<Phone> getPhones() {
 		return phones;
 	}
 
-	public void setPhones(Set<Phone> phones) { this.phones = phones; }
+	public void setPhones(List<Phone> phones) { this.phones = phones; }
 }
