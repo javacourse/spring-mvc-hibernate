@@ -38,10 +38,10 @@
       Skill
       <ul>
         <li>
-          <a href="">List</a>
+          <a href="/skill/list">List</a>
         </li>
         <li>
-          <a href="">Add</a>
+          <a href="/skill/add">Add</a>
         </li>
       </ul>
     </li>

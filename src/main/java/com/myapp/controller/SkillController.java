@@ -39,7 +39,7 @@ public class SkillController {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "new")
+    @RequestMapping(method = RequestMethod.GET, value = "add")
     public ModelAndView addSkill() {
         logger.debug("Received request to add new skill");
         ModelAndView model = new ModelAndView();
@@ -49,6 +49,19 @@ public class SkillController {
         model.setViewName("skill_add");
 
         return model;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "info")
+    public ModelAndView showSkillInfo(@RequestParam(value = "id") Long skillId) throws Exception {
+        if (skillId == null) throw new Exception();
+        ModelAndView mav = new ModelAndView();
+
+        Skill skill = skillService.getById(skillId);
+        mav.addObject(skill);
+
+        mav.setViewName("skill_info");
+
+        return mav;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "edit")
@@ -63,7 +76,7 @@ public class SkillController {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = {"new", "edit"})
+    @RequestMapping(method = RequestMethod.POST, value = {"add", "edit"})
     public String saveSkill(@ModelAttribute(value = "skill") Skill skill) {
         logger.debug("Received postback on skill " + skill);
         skillService.saveOrUpdate(skill);
