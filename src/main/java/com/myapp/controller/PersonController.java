@@ -60,6 +60,7 @@ public class PersonController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "info")
 	public ModelAndView showPersonInfo(@RequestParam(value = "id") Long id) throws Exception {
+		logger.debug("Received request to show person info");
 		ModelAndView mav = new ModelAndView();
 		if (id == null) throw new Exception();
 
@@ -93,9 +94,11 @@ public class PersonController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "edit")
-	public ModelAndView editPerson(@RequestParam(value = "id") Long id)
-	{
+	public ModelAndView editPerson(@RequestParam(value = "id") Long id) throws Exception {
 		logger.debug("Received request to edit person id : " + id);
+
+		if (id == null) throw new Exception();
+
 		ModelAndView mav = new ModelAndView();
 		Person person = personService.getById(id);
 		mav.addObject("person", person);
@@ -113,9 +116,9 @@ public class PersonController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "delete")
 	public String deletePerson(@RequestParam(value = "id") Long id) throws Exception {
-		if (id == null) {
-			throw new Exception();
-		}
+		logger.debug("Received request to delete person id : " + id);
+
+		if (id == null) throw new Exception();
 
 		personService.deleteById(id);
 

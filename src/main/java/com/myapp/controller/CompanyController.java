@@ -6,10 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -42,6 +40,7 @@ public class CompanyController {
 
     @RequestMapping(method = RequestMethod.GET, value="info")
     public ModelAndView showCompanyInfo(@RequestParam(value = "id") Long companyId) throws Exception {
+        logger.debug("Received request to show company info");
         if (companyId == null) throw new Exception();
 
         ModelAndView mav = new ModelAndView();
@@ -84,5 +83,15 @@ public class CompanyController {
         companyService.saveOrUpdate(company);
 
         return "redirect:list";
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public String handleException(Exception ex)
+    {
+
+        logger.warn(ClassUtils.getShortName(ex.getClass()) + " -- "
+                + ex.getMessage());
+        return ex.getMessage();
     }
 }

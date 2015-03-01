@@ -6,10 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -53,6 +51,7 @@ public class SkillController {
 
     @RequestMapping(method = RequestMethod.GET, value = "info")
     public ModelAndView showSkillInfo(@RequestParam(value = "id") Long skillId) throws Exception {
+        logger.debug("Received request to show skill info");
         if (skillId == null) throw new Exception();
         ModelAndView mav = new ModelAndView();
 
@@ -65,8 +64,9 @@ public class SkillController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "edit")
-    public ModelAndView editSkill(@RequestParam(value = "id") long id) {
-        logger.debug("Received request to edit");
+    public ModelAndView editSkill(@RequestParam(value = "id") Long id) throws Exception {
+        logger.debug("Received request to edit skill");
+        if (id == null) throw new Exception();
         ModelAndView model = new ModelAndView();
         Skill skill = skillService.getById(id);
 
@@ -82,5 +82,14 @@ public class SkillController {
         skillService.saveOrUpdate(skill);
 
         return "redirect:list";
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public String handleException(Exception ex)
+    {
+        logger.warn(ClassUtils.getShortName(ex.getClass()) + " -- "
+                + ex.getMessage());
+        return ex.getMessage();
     }
 }
