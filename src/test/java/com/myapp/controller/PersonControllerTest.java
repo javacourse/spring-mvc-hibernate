@@ -65,8 +65,7 @@ public class PersonControllerTest
 	}
 
 	@Test
-	public void shouldReturnSecondPersonWithEditMav()
-	{
+	public void shouldReturnSecondPersonWithEditMav() throws Exception {
 		Long templateId = dataInitializer.people.get(1);
 		ModelAndView mav = personController.editPerson(templateId);
 		assertNotNull(mav);

@@ -60,7 +60,7 @@ public class PersonDaoImpl extends AbstractHibernateDAO<Person, Long> implements
         }
     }
 
-    @Override
+    /*@Override
     public List<Person> findAll() {
         Criteria crit = getSession().createCriteria(getPersistentClass());
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -69,5 +69,5 @@ public class PersonDaoImpl extends AbstractHibernateDAO<Person, Long> implements
        // System.out.println(getPersistentClass());
 
         return crit.list();
-    }
+    }*/
 }

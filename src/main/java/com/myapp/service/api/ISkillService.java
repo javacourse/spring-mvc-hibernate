@@ -10,5 +10,5 @@ import java.util.List;
 public interface ISkillService {
     public List<Skill> findAll();
     public void saveOrUpdate(Skill skill);
-    public Skill getById(long id);
+    public Skill getById(long id) throws Exception;
 }

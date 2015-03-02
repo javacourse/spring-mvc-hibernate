@@ -31,7 +31,8 @@ public class PersonService implements IPersonService{
         return personDao.findAll();
     }
 
-    public Person getById(long id) {
+    public Person getById(long id) throws Exception {
+        if (!personDao.isExistById(id)) throw new Exception();
         return personDao.getById(id);
     }
 
@@ -39,7 +40,8 @@ public class PersonService implements IPersonService{
         personDao.saveOrUpdate(person);
     }
 
-    public List<Person> getByCompanyId(Long companyId) {
+    public List<Person> getByCompanyId(Long companyId) throws Exception {
+        if (!companyDao.isExistById(companyId)) throw new Exception();
         Company company = companyDao.getById(companyId);
         return personDao.findByCriteria(Restrictions.eq("company", company));
     }
@@ -48,11 +50,13 @@ public class PersonService implements IPersonService{
         return personDao.getBySkills(id);
     }
 
-    public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) {
+    public List<Person> getByCompanyAndSkills(Long companyId, Long ... skillId) throws Exception {
+        if (!companyDao.isExistById(companyId)) throw new Exception();
         return personDao.getByCompanyAndSkills(companyId, skillId);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws Exception {
+        if (!personDao.isExistById(id)) throw new Exception();
         personDao.deleteById(id);
     }
 }

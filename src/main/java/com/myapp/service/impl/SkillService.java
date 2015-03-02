@@ -25,7 +25,8 @@ public class SkillService implements ISkillService {
         skillDao.saveOrUpdate(skill);
     }
 
-    public Skill getById(long id) {
+    public Skill getById(long id) throws Exception {
+        if (!skillDao.isExistById(id)) throw new Exception();
         return skillDao.getById(id);
     }
 }

@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,6 +127,10 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
         for (Criterion c : criterion) {
             crit.add(c);
         }
+
+		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		crit.addOrder(Order.asc("id"));
+
         return crit.list();
    }
     
@@ -178,6 +183,10 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
             example.excludeProperty(exclude);
         }
         crit.add(example);
+
+		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		crit.addOrder(Order.asc("id"));
+
         return crit.list();
     }	
 	
@@ -188,9 +197,10 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 		
 	}
 
-	
-
-//	@Override
-//	public abstract boolean isExist(T entity);
+	@Override
+	public boolean isExistById(ID id) {
+		if (getById(id) != null) return true;
+		else return false;
+	}
 	
 }

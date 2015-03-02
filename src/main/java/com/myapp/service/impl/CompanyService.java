@@ -25,7 +25,8 @@ public class CompanyService implements ICompanyService{
         companyDao.saveOrUpdate(company);
     }
 
-    public Company getById(Long id) {
+    public Company getById(Long id) throws Exception {
+        if (!companyDao.isExistById(id)) throw new Exception();
         return companyDao.getById(id);
     }
 }

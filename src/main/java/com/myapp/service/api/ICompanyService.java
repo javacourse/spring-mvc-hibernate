@@ -11,5 +11,5 @@ import java.util.List;
 public interface ICompanyService {
     public List<Company> findAll();
     public void saveOrUpdate(Company company);
-    public Company getById(Long id);
+    public Company getById(Long id) throws Exception;
 }
