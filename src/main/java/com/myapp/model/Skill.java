@@ -18,7 +18,7 @@ public class Skill implements Serializable{
     @Column(name = "skill_id")
     private Long id;
 
-    @ManyToMany(targetEntity = Person.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Person.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "PERSON_SKILL",
     joinColumns = @JoinColumn(name = "skill_id"),
     inverseJoinColumns = @JoinColumn(name = "person_id"))
