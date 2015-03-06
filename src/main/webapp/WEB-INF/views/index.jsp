@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 <%--
   Created by IntelliJ IDEA.
@@ -18,7 +19,27 @@
   <jsp:include page="header.jsp"></jsp:include>
   <jsp:include page="sidebar.jsp"></jsp:include>
   <div id="content">
-    Content
+    <form:form style="padding:8px" action="" method="get">
+      <table>
+        <tr>
+          <td>
+            Login:
+          </td>
+          <td>
+            <input type="text" name="login">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Password:
+          </td>
+          <td>
+            <input type="password" name="password">
+          </td>
+        </tr>
+      </table>
+      <input type="submit" value="Save"/>
+    </form:form>
   </div>
   <jsp:include page="footer.jsp"></jsp:include>
   </div>
