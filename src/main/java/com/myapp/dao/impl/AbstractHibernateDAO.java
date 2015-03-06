@@ -128,8 +128,8 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
             crit.add(c);
         }
 
-		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		crit.addOrder(Order.asc("id"));
+		/*crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		crit.addOrder(Order.asc("id"));*/
 
         return crit.list();
    }
@@ -184,8 +184,8 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
         }
         crit.add(example);
 
-		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		crit.addOrder(Order.asc("id"));
+		/*crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		crit.addOrder(Order.asc("id"));*/
 
         return crit.list();
     }	

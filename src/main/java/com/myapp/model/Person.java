@@ -1,5 +1,7 @@
 package com.myapp.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.JoinColumnOrFormula;
 
 import java.io.Serializable;
@@ -38,6 +40,7 @@ public class Person implements Serializable {
 	private Company company;
 
 	@ManyToMany(targetEntity = Skill.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name = "PERSON_SKILL",
 	joinColumns = @JoinColumn(name = "person_id"),
 	inverseJoinColumns = @JoinColumn(name = "skill_id"))
