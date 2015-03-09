@@ -1,6 +1,7 @@
 package com.myapp.service.impl;
 
 import com.myapp.dao.api.IPersonDAO;
+import com.myapp.model.Department;
 import com.myapp.model.Person;
 import com.myapp.model.Phone;
 import com.myapp.service.PersonService;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Ilya Ten
@@ -24,15 +24,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> people() {
-        return personDao.findAll();
+    public List<Person> peopleByDepartment(Department department) {
+        return personDao.peopleByDepartment(department);
+    }
+
+    @Override
+    public Person newPerson() {
+        return new Person();
     }
 
     @Override
     public Person getPerson(long id) {
-        if (id < 0) {
-            return new Person();
-        }
         return personDao.getById(id);
     }
 
@@ -47,7 +49,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Set<Phone> getPhones(long id) {
+    public List<Phone> getPhones(long id) {
         return personDao.getPhones(getPerson(id));
     }
 }

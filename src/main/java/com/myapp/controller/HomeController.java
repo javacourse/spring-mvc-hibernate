@@ -23,9 +23,9 @@ public class HomeController
 	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public String home(Model model)
 	{
-		logger.info("Welcome home!");
+		logger.info("Login form");
 		model.addAttribute("controllerMessage",
-				"This is the message from the controller!");
+				"Please provide your credentials");
 		return "home";
 	}
 

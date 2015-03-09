@@ -4,6 +4,7 @@ import com.myapp.dao.api.IDepartmentDAO;
 import com.myapp.model.Department;
 import com.myapp.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by Ilya Ten
  * Date: 3/1/2015
  */
+@Service
 public class DepartmentServiceImpl implements IDepartmentService {
 
     private IDepartmentDAO departmentDAO;

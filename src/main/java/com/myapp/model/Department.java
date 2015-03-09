@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class Department implements Serializable {
     @Id
-    @Column(name = "departmentId")
+    @Column(name = "deptId")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -22,7 +22,7 @@ public class Department implements Serializable {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "departmentId")
+    @JoinColumn(name = "deptId")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Person> people;
 

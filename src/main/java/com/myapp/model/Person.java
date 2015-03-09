@@ -24,7 +24,7 @@ public class Person implements Serializable {
 	private String lastName;
 
 	@ManyToOne
-	@JoinColumn(name = "departmentId", nullable = false)
+	@JoinColumn(name = "deptId", nullable = false)
 	private Department department;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -115,4 +115,7 @@ public class Person implements Serializable {
 	}
 
 	public void setPhones(List<Phone> phones) { this.phones = phones; }
+
+	public void setDepartment(Department department) { this.department = department; }
+
 }

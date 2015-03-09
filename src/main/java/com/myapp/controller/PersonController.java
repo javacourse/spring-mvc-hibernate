@@ -1,7 +1,9 @@
 package com.myapp.controller;
 
+import com.myapp.model.Department;
 import com.myapp.model.Person;
 import com.myapp.model.Phone;
+import com.myapp.service.IDepartmentService;
 import com.myapp.service.PersonService;
 import com.myapp.service.PhoneService;
 import org.slf4j.Logger;
@@ -27,14 +29,22 @@ public class PersonController
 	@Autowired
 	private PhoneService phoneService;
 
+	private IDepartmentService departmentService;
+
+	@Autowired
+	public PersonController(IDepartmentService departmentService) {
+		this.departmentService = departmentService;
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "list")
-	public ModelAndView listPeople()
+	public ModelAndView listPeople(@RequestParam(value = "deptId") Long deptId)
 	{
 		logger.debug("Received request to list persons");
 		ModelAndView mav = new ModelAndView();
-		List<Person> people = personService.people();
+		Department department = departmentService.getDepartment(deptId);
+		List<Person> people = personService.peopleByDepartment(department);
 		logger.debug("Person Listing count = " + people.size());
-		mav.addObject("people", people);
+		mav.addObject("department", department);
 		mav.setViewName("list");
 		return mav;
 
@@ -58,12 +68,10 @@ public class PersonController
 	{
 		logger.debug("Received request to add new person ");
 		ModelAndView mav = new ModelAndView();
-		Person person = personService.getPerson(-1);
+		Person person = personService.newPerson();
 		mav.addObject("person", person);
-
 		mav.setViewName("add");
 		return mav;
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "edit")
@@ -79,20 +87,22 @@ public class PersonController
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = { "new", "edit", "addPhone" })
-	public String savePerson(@ModelAttribute("person") Person person)
+	@RequestMapping(method = RequestMethod.POST, value = {"new","edit"})
+	public String savePerson(@ModelAttribute("person") Person person, @RequestParam(value = "deptId") Long deptId)
 	{
 		logger.debug("Received postback on person " + person);
+		Department department = departmentService.getDepartment(deptId);
+		person.setDepartment(department);
 		personService.savePerson(person);
-		return "redirect:list";
+		return "redirect:list?deptId=" + deptId;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "del")
-	public String deletePerson(@RequestParam(value = "id") Long id)
+	public String deletePerson(@RequestParam(value = "id") Long id, @RequestParam(value = "deptId") Long deptId)
 	{
 		logger.debug("Received request to delete person id : " + id);
 		personService.deletePerson(id);
-		return "redirect:list";
+		return "redirect:list?deptId=" + deptId;
 	}
 
 	@ExceptionHandler(Exception.class)
