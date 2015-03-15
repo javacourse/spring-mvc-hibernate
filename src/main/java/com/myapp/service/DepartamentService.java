@@ -12,6 +12,7 @@ public interface DepartamentService {
     public List<Departament> list();
     public Departament getDepartament(long id);
     public void saveDepartament(Departament departament);
+    //public void updateDepartament(Departament departament);//11111
     public void deleteDepartament(long id);
 }
 

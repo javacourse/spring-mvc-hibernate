@@ -55,19 +55,18 @@ public class PersonController
 		List<Departament> departaments = departamentService.list();
 
 		mav.addObject("departaments", departaments);
-		mav.addObject("test", "testtest1111");
+// 		mav.addObject("test", "testtest1111");
 		mav.setViewName("add");
 		return mav;
 	}
 	@RequestMapping(method = RequestMethod.GET, value = "edit")
-	public ModelAndView editPerson(@RequestParam(value = "id") Long id)
-	{
+	public ModelAndView editPerson(@RequestParam(value = "id") Long id) throws Exception {
 		logger.debug("Received request to edit person id : " + id);
-
+		if (id == null) throw new Exception();
 		ModelAndView mav = new ModelAndView();
 		Person person = personService.getPerson(id);
 
-		logger.debug("Received request person.Id= " + person.getId()+" getFirstName= " + person.getFirstName() + " departament  = " +person.getDepartament().getDepName());
+		logger.debug("Received request person.Id= " + person.getId() + " getFirstName= " + person.getFirstName() + " departament  = " +person.getDepartament().getDepName());
 
 		mav.addObject("person", person);
 

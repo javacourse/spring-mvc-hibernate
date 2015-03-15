@@ -8,18 +8,24 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -1308795024262635690L;
-    //private String depName;
+	//private String depName;
 
 	@Id
 	@Column (name = "personId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = Departament.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "departamentId",nullable = false)
 	private Departament departament;
 
-	@Column (name = "firstName")
+	/*
+	@ManyToOne(targetEntity = Company.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "company_id")
+	private Company company;
+	* */
+
+ 	@Column (name = "firstName")
 	private String firstName;
 
 	@Column (name = "lastName")

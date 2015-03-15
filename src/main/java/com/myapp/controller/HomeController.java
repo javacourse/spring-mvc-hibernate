@@ -27,6 +27,7 @@ public class HomeController
 		model.addAttribute("controllerMessage",
 				"This is the message from the controller!");
 		return "home";
+		//return "private/login";
 	}
 
 }

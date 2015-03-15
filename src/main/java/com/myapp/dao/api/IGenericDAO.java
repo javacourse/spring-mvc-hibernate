@@ -1,9 +1,9 @@
 package com.myapp.dao.api;
 
+import org.hibernate.criterion.Criterion;
+
 import java.io.Serializable;
 import java.util.List;
-
-import org.hibernate.criterion.Criterion;
 
 public interface IGenericDAO<T, ID extends Serializable> {
 

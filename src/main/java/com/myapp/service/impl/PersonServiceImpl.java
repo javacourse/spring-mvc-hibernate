@@ -47,8 +47,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> getByDepartamentId(long id) {
 
-            Departament departament = departamentDAO.getById(id);
-            return personDao.findByCriteria(Restrictions.eq("departament", departament));
+        Departament departament = departamentDAO.getById(id);
+        return personDao.findByCriteria(Restrictions.eq("departament", departament));
 
     }
 }

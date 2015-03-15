@@ -15,18 +15,21 @@ public class Departament implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "departamentId")
+    /* @OneToMany(targetEntity = Person.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "company")
+private List<Person> persons;
+*/
+
+    @OneToMany(targetEntity = Person.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "departament")
+    //@JoinColumn(name = "departamentId")
     private List<Person> persons;
 
-    @Column
+    @Column (unique = true)
     private String depName;
 
     public Departament() {
     }
 
     public Departament(String depName) {
-        //super();
         this.depName = depName;
     }
 
