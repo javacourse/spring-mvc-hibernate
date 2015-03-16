@@ -9,12 +9,18 @@
 
     <http auto-config='true'>
         <intercept-url pattern="/**" access="ROLE_USER" />
+        <session-management>
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+        <form-login default-target-url='/person/list'
+                    always-use-default-target='true' />
     </http>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
+            <password-encoder hash="sha"/>
             <user-service>
-                <user authorities="ROLE_USER" name="guest" password="guest" />
+                <user authorities="ROLE_USER" name="guest" password="35675e68f4b5af7b995d9205ad0fc43842f16450" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
