@@ -15,13 +15,20 @@
         <form-login default-target-url='/person/list'
                     always-use-default-target='true' />
     </http>
+    <!--
+        <authentication-manager alias="authenticationManager">
+            <authentication-provider>
+                <password-encoder hash="sha"/>
+                <user-service>
+                    <user authorities="ROLE_USER" name="guest" password="35675e68f4b5af7b995d9205ad0fc43842f16450" />
+                </user-service>
+            </authentication-provider>
+    </authentication-manager>-->
 
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider>
-            <password-encoder hash="sha"/>
-            <user-service>
-                <user authorities="ROLE_USER" name="guest" password="35675e68f4b5af7b995d9205ad0fc43842f16450" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+        <authentication-manager>
+            <authentication-provider>
+                <jdbc-user-service data-source-ref= "dataSource"/>
+            </authentication-provider>
+        </authentication-manager>
+
 </beans:beans>
