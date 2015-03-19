@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Listing of Departments</h1>
-<table>
+<table border="1">
   <tr class="panel">
     <td>id</td>
     <td align="center">Dep Name</td>
@@ -21,7 +21,7 @@
   </c:forEach>
 </table>
 <a href="new"> Add Department</a> <br/>
-<a href="/person/list">List of People</a>
-<br>
+<a href="/person/list">Go to list of People</a><br/>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

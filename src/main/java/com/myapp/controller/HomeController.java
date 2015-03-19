@@ -29,5 +29,10 @@ public class HomeController
 		return "home";
 		//return "private/login";
 	}
-
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login(Model model)
+	{
+		logger.info("Login!");
+		return "private/login";
+	}
 }

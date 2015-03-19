@@ -29,5 +29,6 @@
 </table>
 <a href="list">Return to persons list</a><br/>
 <a href="search"> reRun Search Person</a> <br/>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

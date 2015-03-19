@@ -1,4 +1,4 @@
-Ы<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page session="false"%>
 <!doctype html>
@@ -6,28 +6,36 @@
 <head>
   <meta charset="utf-8">
   <title>Вход</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
-  <link rel="stylesheet"
-        href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+
 </head>
 
 <body onload='document.f.j_username.focus();'>
 
-<form name='f' action="<c:url value='j_spring_security_check' />"
+<form name='f' action="<c:url value='_spring_security_check' />"
       method='POST'>
   <div class="logincontainer">
 
     <div class="login">
       <table>
         <tr>
-          <td>Имя <input type='text' name='j_username'>
+          <td>Имя
           </td>
+          <td> <input type='text' name='_username'>
+          </td>
+
         </tr>
         <tr>
-          <td>Пароль <input type='password' name='j_password' />
+          <td>Пароль
+          </td>
+          <td> <input type='password' name='_password' />
           </td>
         </tr>
       </table>
+      <br />
+      <input id="_spring_security_remember_me"
+             name="_spring_security_remember_me" type="checkbox" value="true" />
+      <label for="_spring_security_remember_me">Remember Me?</label>
+
       <br /> <input class="btn btn-primary" name="submit" type="submit"
                     value="Вход" /> <br />
     </div>

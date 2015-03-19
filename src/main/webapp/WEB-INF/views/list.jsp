@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Listing People</h1>
-<table>
+<table border="1">
 	<tr class="panel">
 		<td>id</td>
 		<td align="center">Dep id</td>
@@ -29,6 +29,7 @@
 </table>
 <a href="new"> Add Person</a> <br/>
 <a href="search"> Find Person</a> <br/>
-<a href="/department/list">to List of Departament</a>
+<a href="/department/list">Go to List of Departament</a><br/>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

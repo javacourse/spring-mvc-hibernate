@@ -14,5 +14,7 @@ ${controllerMessage}<br/>
 <a href="person/list">Go to the person list</a>
 <br>
 <a href="department/list">Go to the department list</a>
+
+<jsp:include page="footer.jsp" />
 </body>
 </html>
