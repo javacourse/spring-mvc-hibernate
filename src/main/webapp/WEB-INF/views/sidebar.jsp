@@ -11,6 +11,9 @@
 
 <div id="sidebar">
   <ul>
+    <li>
+      <a href="<c:url value="/index"/>">Home</a>
+    </li>
     <li>Person
       <ul>
         <li>

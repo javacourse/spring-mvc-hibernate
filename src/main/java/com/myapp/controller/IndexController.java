@@ -11,13 +11,20 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping(value = "/index")
 public class IndexController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/index")
     public ModelAndView init() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
+
+        return mav;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login");
 
         return mav;
     }

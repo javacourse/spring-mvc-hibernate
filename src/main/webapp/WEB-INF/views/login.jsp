@@ -19,7 +19,27 @@
   <jsp:include page="header.jsp"></jsp:include>
   <jsp:include page="sidebar.jsp"></jsp:include>
   <div id="content">
-    Main page
+    <form style="padding:8px" name="login" action="<c:url value='j_spring_security_check' />" method="POST">
+      <table>
+        <tr>
+          <td>
+            Login:
+          </td>
+          <td>
+            <input type="text" name="login">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Password:
+          </td>
+          <td>
+            <input type="password" name="password">
+          </td>
+        </tr>
+      </table>
+      <input type="submit" value="Save"/>
+    </form>
   </div>
   <jsp:include page="footer.jsp"></jsp:include>
   </div>
