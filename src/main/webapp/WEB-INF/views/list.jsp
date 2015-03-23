@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Listing People</h1>
+<a href="/j_spring_security_logout">Logout</a>
 <form  method="GET" action="/person/search">
     <label >First Name     <input type="text" name="firstName" value="${searchParams.get("firstName")}"/></label> <br/>
     <label >City <input type="text" name="city" value="${searchParams.get("city")}" /></label><br/>

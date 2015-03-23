@@ -11,6 +11,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     </http>-->
 
     <http auto-config="false" use-expressions="true">
+        <intercept-url pattern="/favicon.ico" access="permitAll()" />
         <intercept-url pattern="/resources" access="permitAll()" />
         <intercept-url pattern="/login" access="permitAll()" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
@@ -18,7 +19,10 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <form-login login-processing-url="/j_spring_security_check"
                     login-page="/login"
                     default-target-url="/"
-                    authentication-failure-url="/login"/>
+                    authentication-failure-url="/login"
+                    username-parameter="login"
+                    password-parameter="password"
+                />
 
         <logout logout-url="/j_spring_security_logout"
                 logout-success-url="/" invalidate-session="true" />
@@ -49,24 +53,23 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
-            <!--<jdbc-user-service data-source-ref="dataSource"
+               <jdbc-user-service data-source-ref="dataSource"
 
-               users-by-username-query="
-                  select username,password, enabled
-                  from user where username=?"
+                    users-by-username-query="
+                       select username,password, enabled
+                       from user where username=?"
 
-               authorities-by-username-query="
-                  select u.username, ur.authority from user u, user_roles ur
-                  where u.user_id = ur.user_id and u.username =?"
-            />-->
+                    authorities-by-username-query="
+                       select u.username, ur.authority from user u, user_roles ur
+                       where u.user_id = ur.user_id and u.username =?"
+                 />
+<!--              <user-service>
+                 <user name="admin" password="123" authorities="ROLE_ADMIN,ROLE_USER" />
+                    <user name="joe" password="111" authorities="ROLE_USER" />
+      </user-service>-->
+</authentication-provider>
+</authentication-manager>
 
-            <user-service>
-                <user name="admin" password="123" authorities="ROLE_ADMIN,ROLE_USER" />
-                <user name="joe" password="111" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
-
-    <!--<beans:bean id="loginSuccessHandler" class="alvion.LoginSuccessHandler" />-->
+<!--<beans:bean id="loginSuccessHandler" class="alvion.LoginSuccessHandler" />-->
     <!--<beans:bean id="loginFailureHandler" class="alvion.LoginFailureHandler" />-->
 </beans:beans>
