@@ -23,10 +23,16 @@ public class HomeController
 	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public String home(Model model)
 	{
-		logger.info("Login form");
+		logger.info("Welcome home!");
 		model.addAttribute("controllerMessage",
-				"Please provide your credentials");
+				"This is the message from the controller!");
 		return "home";
 	}
 
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login(Model model)
+	{
+		logger.info("Login!");
+		return "login";
+	}
 }

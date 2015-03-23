@@ -41,7 +41,7 @@
 				hibernate.dialect = ${db.dialect}
 				hibernate.show_sql = true
 				hibernate.format_sql = true
-				hibernate.hbm2ddl.auto = create-drop
+				hibernate.hbm2ddl.auto = create-update
 			</value>
 		</property>
 	</bean>

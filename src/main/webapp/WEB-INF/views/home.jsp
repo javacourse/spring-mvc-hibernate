@@ -9,20 +9,16 @@
 </head>
 <body>
 <h1>
-	Logon screen
+	Hello world!
 </h1>
 ${controllerMessage}<br/>
 <br/>
-<form action="<c:url value="/department/deptList" />" >
-
-	<input type="text" name="un"/><br>
-
-	<input type="text" name="pw"/>
-
-	<input type="submit" value="submit">
-
-</form>
 <br/>
+<a href="/department/deptList">Departments</a>
+<c:url value="/j_spring_security_logout" var="logoutUrl" />
 
+<form action="${logoutUrl}" method="post" id="logoutForm">
+	<input name="submit" type="submit" value="Logout"/>
+</form>
 </body>
 </html>
